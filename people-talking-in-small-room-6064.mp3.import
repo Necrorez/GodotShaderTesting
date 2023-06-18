@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/people-talking-in-small-room-6064.mp3-a694749670e10c632fe15249c2712e04.mp3str"
+
+[deps]
+
+source_file="res://people-talking-in-small-room-6064.mp3"
+dest_files=[ "res://.import/people-talking-in-small-room-6064.mp3-a694749670e10c632fe15249c2712e04.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

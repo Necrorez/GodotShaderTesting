@@ -1,0 +1,164 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://bus.obj" type="ArrayMesh" id=1]
+
+[sub_resource type="VisualShaderNodeScalarOp" id=1]
+operator = 7
+
+[sub_resource type="VisualShaderNodeScalarOp" id=2]
+operator = 1
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=3]
+function = 12
+
+[sub_resource type="VisualShaderNodeVectorOp" id=4]
+output_port_for_preview = 0
+operator = 7
+
+[sub_resource type="VisualShaderNodeVectorOp" id=5]
+output_port_for_preview = 0
+operator = 7
+
+[sub_resource type="VisualShaderNodeExpression" id=6]
+output_port_for_preview = 0
+size = Vector2( 619, 418 )
+expression = "if(input0 < 0.02){
+output0=vec3(0.0,0.0,0.0);
+}
+else{
+output=vec3(1.0,1.0,1.0);
+}"
+
+[sub_resource type="VisualShaderNodeInput" id=7]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id=8]
+
+[sub_resource type="VisualShaderNodeVectorOp" id=9]
+output_port_for_preview = 0
+operator = 7
+
+[sub_resource type="VisualShaderNodeScalarOp" id=10]
+default_input_values = [ 0, 1.0, 1, 0.0 ]
+operator = 1
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=11]
+function = 12
+
+[sub_resource type="VisualShaderNodeScalarOp" id=12]
+operator = 1
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=13]
+function = 12
+
+[sub_resource type="VisualShader" id=14]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx, async_visible, unshaded;
+
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:2
+	vec3 n_out2p0 = vec3(UV, 0.0);
+
+// VectorDecompose:4
+	float n_out4p0 = n_out2p0.x;
+	float n_out4p1 = n_out2p0.y;
+	float n_out4p2 = n_out2p0.z;
+
+// VectorOp:5
+	vec3 n_out5p0 = min(vec3(n_out4p0), vec3(n_out4p1));
+
+// ScalarOp:6
+	float n_in6p0 = 1.00000;
+	float n_out6p0 = n_in6p0 - n_out4p0;
+
+// ScalarFunc:7
+	float n_out7p0 = abs(n_out6p0);
+
+// ScalarOp:8
+	float n_in8p1 = 0.00000;
+	float n_out8p0 = n_out4p1 - n_in8p1;
+
+// ScalarFunc:9
+	float n_out9p0 = abs(n_out8p0);
+
+// ScalarOp:10
+	float n_out10p0 = min(n_out7p0, n_out9p0);
+
+// VectorOp:13
+	vec3 n_out13p0 = min(n_out5p0, vec3(n_out10p0));
+
+// ScalarOp:11
+	float n_out11p0 = n_out4p0 - n_out4p1;
+
+// ScalarFunc:12
+	float n_out12p0 = abs(n_out11p0);
+
+// VectorOp:14
+	vec3 n_out14p0 = min(n_out13p0, vec3(n_out12p0));
+
+// Output:0
+	ALBEDO = n_out14p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -9.42957, 49.7153 )
+flags/unshaded = true
+nodes/fragment/0/position = Vector2( 2280, 200 )
+nodes/fragment/2/node = SubResource( 7 )
+nodes/fragment/2/position = Vector2( 300, 220 )
+nodes/fragment/4/node = SubResource( 8 )
+nodes/fragment/4/position = Vector2( 120, 440 )
+nodes/fragment/5/node = SubResource( 9 )
+nodes/fragment/5/position = Vector2( 460, 500 )
+nodes/fragment/6/node = SubResource( 10 )
+nodes/fragment/6/position = Vector2( 160, 780 )
+nodes/fragment/7/node = SubResource( 11 )
+nodes/fragment/7/position = Vector2( 400, 820 )
+nodes/fragment/8/node = SubResource( 12 )
+nodes/fragment/8/position = Vector2( 137.556, 980.833 )
+nodes/fragment/9/node = SubResource( 13 )
+nodes/fragment/9/position = Vector2( 442.556, 1001.83 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( 825.556, 887.833 )
+nodes/fragment/11/node = SubResource( 2 )
+nodes/fragment/11/position = Vector2( 200, 1140 )
+nodes/fragment/12/node = SubResource( 3 )
+nodes/fragment/12/position = Vector2( 520, 1140 )
+nodes/fragment/13/node = SubResource( 4 )
+nodes/fragment/13/position = Vector2( 1060, 700 )
+nodes/fragment/14/node = SubResource( 5 )
+nodes/fragment/14/position = Vector2( 1180, 900 )
+nodes/fragment/15/node = SubResource( 6 )
+nodes/fragment/15/position = Vector2( 1400, 740 )
+nodes/fragment/15/size = Vector2( 619, 418 )
+nodes/fragment/15/input_ports = "0,1,input0;"
+nodes/fragment/15/output_ports = "0,1,output0;"
+nodes/fragment/15/expression = "if(input0 < 0.02){
+output0=vec3(0.0,0.0,0.0);
+}
+else{
+output=vec3(1.0,1.0,1.0);
+}"
+nodes/fragment/connections = PoolIntArray( 2, 0, 4, 0, 4, 0, 5, 0, 4, 1, 5, 1, 4, 0, 6, 1, 6, 0, 7, 0, 4, 1, 8, 0, 8, 0, 9, 0, 7, 0, 10, 0, 9, 0, 10, 1, 4, 0, 11, 0, 4, 1, 11, 1, 11, 0, 12, 0, 5, 0, 13, 0, 10, 0, 13, 1, 13, 0, 14, 0, 12, 0, 14, 1, 14, 0, 15, 0, 14, 0, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = SubResource( 14 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = ExtResource( 1 )
+material/0 = SubResource( 15 )

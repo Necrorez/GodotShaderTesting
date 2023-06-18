@@ -1,0 +1,79 @@
+[gd_resource type="VisualShader" load_steps=9 format=2]
+
+[sub_resource type="VisualShaderNodeInput" id=14]
+output_port_for_preview = 0
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeTextureUniform" id=15]
+output_port_for_preview = 0
+uniform_name = "Mask"
+
+[sub_resource type="VisualShaderNodeInput" id=8]
+input_name = "vertex"
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id=9]
+
+[sub_resource type="VisualShaderNodeInput" id=10]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=11]
+function = 0
+
+[sub_resource type="VisualShaderNodeVectorCompose" id=12]
+
+[sub_resource type="VisualShaderNodeScalarInterp" id=13]
+
+[resource]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx, async_visible;
+
+uniform sampler2D Mask;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// TextureUniform:3
+	vec3 n_out3p0;
+	float n_out3p1;
+	{
+		vec4 n_tex_read = texture(Mask, UV.xy);
+		n_out3p0 = n_tex_read.rgb;
+		n_out3p1 = n_tex_read.a;
+	}
+
+// Output:0
+	ALBEDO = n_out3p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -155.864, -11.5919 )
+nodes/vertex/0/position = Vector2( 1660, 100 )
+nodes/vertex/2/node = SubResource( 8 )
+nodes/vertex/2/position = Vector2( 380, 100 )
+nodes/vertex/3/node = SubResource( 9 )
+nodes/vertex/3/position = Vector2( 665.544, 52.9519 )
+nodes/vertex/4/node = SubResource( 10 )
+nodes/vertex/4/position = Vector2( 320, 300 )
+nodes/vertex/5/node = SubResource( 11 )
+nodes/vertex/5/position = Vector2( 540, 300 )
+nodes/vertex/6/node = SubResource( 12 )
+nodes/vertex/6/position = Vector2( 1190.54, 313.952 )
+nodes/vertex/7/node = SubResource( 13 )
+nodes/vertex/7/position = Vector2( 941.405, 360.48 )
+nodes/vertex/connections = PoolIntArray( 2, 0, 3, 0, 4, 0, 5, 0, 3, 2, 6, 2, 3, 0, 6, 0, 5, 0, 7, 0, 3, 1, 7, 1, 7, 0, 6, 1 )
+nodes/fragment/0/position = Vector2( 2120, 40 )
+nodes/fragment/2/node = SubResource( 14 )
+nodes/fragment/2/position = Vector2( 520, 20 )
+nodes/fragment/3/node = SubResource( 15 )
+nodes/fragment/3/position = Vector2( 380, 340 )
+nodes/fragment/connections = PoolIntArray( 3, 0, 0, 0 )

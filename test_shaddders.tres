@@ -1,0 +1,70 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx, async_visible;
+
+uniform float freq = 0.1;
+uniform float custom_time = 3;
+uniform float speed = 3;
+uniform float amp = 30;
+
+
+
+void vertex() {
+// Input:3
+	vec3 n_out3p0 = VERTEX;
+
+// VectorDecompose:6
+	float n_out6p0 = n_out3p0.x;
+	float n_out6p1 = n_out3p0.y;
+	float n_out6p2 = n_out3p0.z;
+
+// ScalarUniform:14
+	float n_out14p0 = freq;
+
+// ScalarOp:8
+	float n_out8p0 = n_out6p0 * n_out14p0;
+
+// ScalarUniform:13
+	float n_out13p0 = custom_time;
+
+// ScalarUniform:15
+	float n_out15p0 = speed;
+
+// ScalarOp:10
+	float n_out10p0 = n_out13p0 * n_out15p0;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 + n_out10p0;
+
+// ScalarFunc:12
+	float n_out12p0 = sin(n_out9p0);
+
+// ScalarUniform:17
+	float n_out17p0 = amp;
+
+// ScalarOp:16
+	float n_out16p0 = n_out12p0 * n_out17p0;
+
+// ScalarOp:18
+	float n_out18p0 = n_out16p0 + n_out6p1;
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out6p0, n_out18p0, n_out6p2);
+
+// Output:0
+	VERTEX.y += n_out7p0.y;
+
+}
+
+void fragment() {
+// Output:0
+
+}
+
+void light() {
+// Output:0
+
+}
+"

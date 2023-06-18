@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://MeditationLine.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://people-talking-in-small-room-6064.mp3" type="AudioStream" id=2]
+[ext_resource path="res://Control.gd" type="Script" id=3]
+[ext_resource path="res://visualtest.tres" type="Material" id=4]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
+material = ExtResource( 4 )
+position = Vector2( 955.064, 664 )
+scale = Vector2( 6.39291, 6.55248 )
+mesh = ExtResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+autoplay = true
